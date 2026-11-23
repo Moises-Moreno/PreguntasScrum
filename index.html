@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sprint de preguntas: eventos y artefactos de Scrum</title>
+<meta name="description" content="Juego didáctico de 12 preguntas sobre los eventos y artefactos de Scrum. Solo tienes una oportunidad.">
+<meta property="og:title" content="Sprint de preguntas: Scrum">
+<meta property="og:description" content="12 preguntas, una sola oportunidad. ¿Cuánto sabes de eventos y artefactos de Scrum?">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Source+Sans+3:wght@400;600&display=swap">
+<style>
+:root{--bg:#eef1f4;--grid:#dde3e9;--ink:#14213d;--mut:#51607a;--card:#fff;--note:#ffe27a;--ok:#1f9d6b;--bad:#d64545;--acc:#2f5bea;--line:#14213d;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root{--bg:#10172a;--grid:#1a2440;--ink:#f1f4fa;--mut:#9fb0cf;--card:#18223d;--note:#c9a227;--ok:#3ecf94;--bad:#ff7b7b;--acc:#7c9bff;--line:#f1f4fa}}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;color:var(--ink);font:400 clamp(16px,2vw,20px)/1.5 "Source Sans 3",system-ui,sans-serif;background-color:var(--bg);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:32px 32px}
+main{max-width:920px;margin:0 auto;padding:24px 18px 48px}
+h1,h2,.q{font-family:"Bricolage Grotesque",system-ui,sans-serif;letter-spacing:-.02em;margin:0}
+h1{font-size:clamp(34px,6vw,60px);line-height:1.05;font-weight:800}
+.note{display:inline-block;background:var(--note);color:#14213d;padding:6px 14px;font-weight:600;transform:rotate(-2deg);box-shadow:3px 3px 0 var(--line);margin-bottom:18px}
+.card{background:var(--card);border:2px solid var(--line);box-shadow:6px 6px 0 var(--line);padding:clamp(18px,3vw,32px)}
+.btn{font:700 1em "Bricolage Grotesque",sans-serif;color:var(--ink);background:var(--card);border:2px solid var(--line);padding:12px 22px;cursor:pointer;box-shadow:3px 3px 0 var(--line)}
+.btn:hover{transform:translate(-1px,-1px)}.btn.p{background:var(--acc);color:#fff}
+.btn:focus-visible,.opt:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-offset:3px}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+input{font:600 1em "Source Sans 3",sans-serif;color:var(--ink);background:var(--bg);border:2px solid var(--line);padding:11px 14px;min-width:240px;flex:1}
+.lanes{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:22px 0}
+.lanes div{border:2px dashed var(--mut);padding:12px 16px;color:var(--mut)}
+.lanes b{color:var(--ink);display:block}
+.warn{margin:16px 0 0;padding:12px 16px;border-left:6px solid var(--bad);background:var(--bg)}
+.top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px;font-weight:600}
+.bar{height:10px;border:2px solid var(--line);background:var(--card);margin-bottom:18px}
+.bar i{display:block;height:100%;background:var(--acc);transition:width .3s}
+.tag{font-weight:600;color:var(--mut);margin-bottom:6px}
+.q{font-size:clamp(24px,4vw,38px);line-height:1.15;font-weight:700;margin-bottom:22px}
+.opts{display:grid;gap:12px}
+.opt{display:flex;gap:14px;text-align:left;align-items:flex-start;font:600 1em "Source Sans 3",sans-serif;color:var(--ink);background:var(--card);border:2px solid var(--line);padding:14px 16px;cursor:pointer}
+.opt:hover:not(:disabled){background:var(--note);color:#14213d}
+.opt kbd{font:700 .9em "Bricolage Grotesque",sans-serif;border:2px solid currentColor;min-width:28px;text-align:center}
+.opt.ok{background:var(--ok);color:#fff;border-color:var(--ok)}
+.opt.bad{background:var(--bad);color:#fff;border-color:var(--bad)}
+.opt:disabled{cursor:default}
+.fb{margin-top:18px;padding:14px 16px;border-left:6px solid var(--acc);background:var(--bg)}
+.big{font:800 clamp(56px,12vw,110px)/1 "Bricolage Grotesque",sans-serif}
+.rank{width:100%;border-collapse:collapse;margin:10px 0}.rank td,.rank th{padding:8px 10px;border-bottom:2px solid var(--grid);text-align:left}.rank tr.me{background:var(--note);color:#14213d}.rank td:last-child,.rank th:last-child{text-align:right}
+.st{margin:0 0 12px;color:var(--mut);font-weight:600}
+.hide{display:none}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+<section id="start" class="hide">
+  <span class="note">Juego didáctico</span>
+  <h1>Sprint de preguntas: eventos y artefactos de Scrum</h1>
+  <div class="lanes">
+    <div><b>Eventos</b>Sprint, Sprint Planning, Daily Scrum, Sprint Review, Sprint Retrospective</div>
+    <div><b>Artefactos</b>Product Backlog, Sprint Backlog, Incremento y sus compromisos</div>
+  </div>
+  <div class="card">
+    <h2 style="font-size:26px;margin-bottom:12px">¿Listo para el sprint?</h2>
+    <div class="row">
+      <input id="name" type="text" maxlength="30" placeholder="Tu nombre (único)" aria-label="Tu nombre" autocomplete="name">
+      <input id="contact" type="text" maxlength="60" placeholder="Correo o teléfono para tu premio" aria-label="Contacto">
+      <button class="btn p" id="go">Comenzar</button>
+    </div>
+    <p class="st" id="err" style="color:var(--bad);margin:12px 0 0"></p>
+    <p class="warn"><b>Solo tienes una oportunidad.</b> Son 12 preguntas y cada una se responde una sola vez. Si recargas la página, el juego continúa donde lo dejaste.</p>
+  </div>
+</section>
+
+<section id="game" class="hide">
+  <div class="top"><span id="prog"></span><span id="pts"></span></div>
+  <div class="bar"><i id="fill"></i></div>
+  <div class="card">
+    <div class="tag" id="tag"></div>
+    <div class="q" id="q"></div>
+    <div class="opts" id="opts"></div>
+    <div class="fb hide" id="fb"></div>
+    <div class="row" style="margin-top:18px"><button class="btn p hide" id="next">Siguiente pregunta</button></div>
+  </div>
+</section>
+
+<section id="end" class="hide">
+  <span class="note">Fin del sprint</span>
+  <div class="card">
+    <p id="who" style="margin:0;color:var(--mut);font-weight:600"></p>
+    <div class="big" id="final"></div>
+    <h2 id="msg" style="margin:10px 0 8px"></h2>
+    <p id="hits" style="margin:0 0 20px"></p>
+    <div class="row"><button class="btn p" id="copy">Copiar mi resultado</button></div>
+    <p class="st" id="sent"></p>
+    <button class="btn hide" id="retry">Reintentar envío</button>
+    <h2 style="font-size:24px;margin-top:18px">Ranking (mejores 10)</h2>
+    <div id="top"></div>
+    <p class="warn" style="border-color:var(--acc)">Tu intento ya quedó registrado. No se puede volver a jugar.</p>
+  </div>
+</section>
+<section id="rank" class="hide">
+  <span class="note">Ranking en vivo</span>
+  <div class="card"><div id="all"></div><p class="st" id="cnt"></p></div>
+</section>
+</main>
+
+<script>
+const Q=[
+{t:"Eventos",q:"¿Cuál es la duración máxima del Daily Scrum?",o:["15 minutos","30 minutos","1 hora","Lo que haga falta"],e:"El Daily Scrum dura 15 minutos y se hace todos los días del Sprint, a la misma hora y en el mismo lugar."},
+{t:"Eventos",q:"¿Cuál es la duración máxima de un Sprint?",o:["Un mes o menos","Dos semanas exactas","Seis semanas","Tres meses"],e:"Un Sprint dura un mes como máximo. Los Sprints más cortos pueden generar más ciclos de aprendizaje."},
+{t:"Artefactos",q:"¿Qué compromiso está asociado al Product Backlog?",o:["El Product Goal","El Sprint Goal","La Definición de Terminado","El Burndown"],e:"Product Backlog → Product Goal. Sprint Backlog → Sprint Goal. Incremento → Definición de Terminado."},
+{t:"Artefactos",q:"¿Qué compromiso está asociado al Sprint Backlog?",o:["El Sprint Goal","El Product Goal","La Definición de Terminado","El Plan de release"],e:"El Sprint Goal es el único objetivo del Sprint y da coherencia al trabajo del equipo."},
+{t:"Artefactos",q:"¿Qué compromiso está asociado al Incremento?",o:["La Definición de Terminado","El Sprint Goal","El Product Goal","El presupuesto"],e:"Un trabajo solo cuenta como parte del Incremento cuando cumple la Definición de Terminado."},
+{t:"Eventos",q:"¿En qué evento el equipo inspecciona el resultado del Sprint con los interesados y se ajusta el Product Backlog?",o:["Sprint Review","Daily Scrum","Sprint Retrospective","Sprint Planning"],e:"En la Sprint Review se presenta el trabajo, se conversa con los interesados y se adaptan los próximos pasos."},
+{t:"Eventos",q:"¿Qué evento sirve para planificar mejoras en la calidad y efectividad del equipo?",o:["Sprint Retrospective","Sprint Review","Daily Scrum","Refinamiento"],e:"La Retrospective cierra el Sprint e inspecciona personas, interacciones, procesos, herramientas y la Definición de Terminado."},
+{t:"Roles y artefactos",q:"¿Quién es responsable de gestionar el Product Backlog?",o:["El Product Owner","El Scrum Master","Los Developers","El gerente del proyecto"],e:"El Product Owner es responsable de la gestión efectiva del Product Backlog, aunque puede delegar tareas."},
+{t:"Eventos",q:"¿Cuál de estas preguntas NO se responde en la Sprint Planning?",o:["¿Quién tuvo la culpa del último retraso?","¿Por qué es valioso este Sprint?","¿Qué se puede hacer en este Sprint?","¿Cómo se hará el trabajo elegido?"],e:"La Planning responde tres temas: por qué es valioso el Sprint, qué se puede hacer y cómo se hará el trabajo."},
+{t:"Eventos",q:"¿Quién tiene la autoridad para cancelar un Sprint?",o:["Solo el Product Owner","El Scrum Master","Cualquier Developer","Los interesados"],e:"Solo el Product Owner puede cancelar el Sprint, por ejemplo cuando el Sprint Goal queda obsoleto."},
+{t:"¿Evento o artefacto?",q:"La Sprint Retrospective es un…",o:["Evento","Artefacto","Rol","Compromiso"],e:"Los cinco eventos son: Sprint, Sprint Planning, Daily Scrum, Sprint Review y Sprint Retrospective."},
+{t:"¿Evento o artefacto?",q:"El Sprint Backlog es un…",o:["Artefacto","Evento","Rol","Reunión"],e:"Los tres artefactos son: Product Backlog, Sprint Backlog e Incremento."}
+];
+const API="";// Pega aquí la URL /exec de tu Apps Script (ver GUIA-RANKING.md). Vacío = modo local sin ranking.
+const KEY="scrum-sprint-v1",$=id=>document.getElementById(id);
+let mem=null;
+function load(){try{return JSON.parse(localStorage.getItem(KEY))}catch(e){return mem}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){mem=S}}
+// Para probar como presentador: abre la página con ?reset=1
+if(location.search.includes("reset=1")){try{localStorage.removeItem(KEY)}catch(e){}history.replaceState(null,"",location.pathname)}
+let S=load(),cur=0,order=[],locked=false;
+const shuf=a=>a.map(x=>[Math.random(),x]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]);
+function show(id){["start","game","end","rank"].forEach(s=>$(s).classList.toggle("hide",s!==id))}
+function render(){
+  cur=S.i;const d=Q[cur];locked=false;
+  $("prog").textContent="Pregunta "+(cur+1)+" de "+Q.length;
+  $("pts").textContent="Puntos: "+S.score;
+  $("fill").style.width=(cur/Q.length*100)+"%";
+  $("tag").textContent=d.t;$("q").textContent=d.q;
+  order=shuf(d.o);
+  $("opts").innerHTML=order.map((o,k)=>`<button class="opt" data-k="${k}"><kbd>${k+1}</kbd><span>${o}</span></button>`).join("");
+  $("fb").classList.add("hide");$("next").classList.add("hide");
+}
+function answer(k){
+  if(locked)return;locked=true;
+  const d=Q[cur],right=order[k]===d.o[0];
+  if(right){S.score+=10;S.hits++}
+  S.i=cur+1;if(S.i>=Q.length){S.done=true;S.seg=Math.round((Date.now()-S.t0)/1000)}
+  save();
+  document.querySelectorAll(".opt").forEach((b,j)=>{b.disabled=true;if(order[j]===d.o[0])b.classList.add("ok");else if(j===k)b.classList.add("bad")});
+  $("pts").textContent="Puntos: "+S.score;
+  $("fb").innerHTML=(right?"<b>¡Correcto! +10 puntos.</b> ":"<b>No es esa.</b> ")+d.e;
+  $("fb").classList.remove("hide");
+  $("next").textContent=S.done?"Ver resultados":"Siguiente pregunta";
+  $("next").classList.remove("hide");$("next").focus();
+}
+function finish(){
+  show("end");send();
+  $("who").textContent=S.name;
+  $("final").textContent=S.score+" / "+Q.length*10;
+  $("hits").textContent=S.hits+" aciertos de "+Q.length+" preguntas.";
+  $("msg").textContent=S.score>=100?"Scrum Master en potencia":S.score>=70?"Buen sprint: ya dominas lo esencial":"Toca una retrospectiva para mejorar";
+}
+const api=q=>fetch(API+q).then(r=>r.json());
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function table(l,me){return '<table class="rank"><tr><th>#</th><th>Nombre</th><th>Puntos</th><th>Tiempo</th></tr>'+l.map((r,k)=>`<tr class="${r.nombre===me?"me":""}"><td>${k+1}</td><td>${esc(r.nombre)}</td><td>${r.puntaje}</td><td>${r.segundos}s</td></tr>`).join("")+"</table>"}
+async function send(){
+  if(!API){$("sent").textContent="Modo local: este resultado no se envía a ningún ranking.";return}
+  $("retry").classList.add("hide");
+  try{
+    if(!S.sent){
+      $("sent").textContent="Enviando resultado…";
+      const r=await(await fetch(API,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({id:S.id,nombre:S.name,contacto:S.contact,puntaje:S.score,aciertos:S.hits,segundos:S.seg})})).json();
+      if(!r.ok)throw 0;
+      S.sent=true;save();
+    }
+    $("sent").textContent="Resultado registrado en el ranking.";
+    $("top").innerHTML=table((await api("?action=top&n=10")).top,S.name);
+  }catch(e){$("sent").textContent="No se pudo enviar tu resultado. Revisa tu conexión e inténtalo de nuevo.";$("retry").classList.remove("hide")}
+}
+async function poll(){
+  try{const t=await api("?action=top&n=100");$("all").innerHTML=table(t.top,"");$("cnt").textContent=t.total+" participantes. Se actualiza solo."}catch(e){$("cnt").textContent="Sin conexión con el ranking."}
+  setTimeout(poll,15000);
+}
+function boot(){
+  if(location.search.includes("ranking=1")){show("rank");poll();return}
+  if(S&&S.done)finish();
+  else if(S&&S.name){show("game");render()}
+  else show("start");
+}
+$("go").onclick=async()=>{
+  const name=$("name").value.trim(),contact=$("contact").value.trim();
+  if(API&&(!name||!contact)){$("err").textContent="Escribe tu nombre y un contacto para recibir tu premio.";return}
+  $("go").disabled=true;$("err").textContent="";
+  try{
+    if(API&&!(await api("?action=check&name="+encodeURIComponent(name))).available){$("err").textContent="Ese nombre ya participó. Usa otro.";$("go").disabled=false;return}
+  }catch(e){$("err").textContent="No se pudo conectar. Inténtalo de nuevo.";$("go").disabled=false;return}
+  S={id:crypto.randomUUID?crypto.randomUUID():Date.now()+"-"+Math.random(),name:name||"Anónimo",contact,i:0,score:0,hits:0,done:false,t0:Date.now()};
+  save();$("go").disabled=false;show("game");render();
+};
+$("name").addEventListener("keydown",e=>{if(e.key==="Enter")$("go").click()});
+$("opts").addEventListener("click",e=>{const b=e.target.closest(".opt");if(b)answer(+b.dataset.k)});
+$("next").onclick=()=>{S.done?finish():render()};
+$("copy").onclick=async()=>{
+  const t=S.name+" sacó "+S.score+"/"+Q.length*10+" ("+S.hits+"/"+Q.length+" aciertos) en el Sprint de preguntas de Scrum.";
+  try{await navigator.clipboard.writeText(t);$("copy").textContent="¡Copiado!"}catch(e){$("copy").textContent=t}
+};
+document.addEventListener("keydown",e=>{
+  if($("game").classList.contains("hide"))return;
+  if(e.key>="1"&&e.key<="4"&&!locked)answer(+e.key-1);
+});
+$("retry").onclick=send;
+boot();
+</script>
+</body>
+</html>
